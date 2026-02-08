@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <!-- מטא נתונים בסיסיים -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Gym - חדר כושר חכם</title>
+  
+  <!-- קישורים לסגנונות -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- תפריט ניווט עליון -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container-fluid">
+
+    <!-- לוגו של האתר -->
+    <a class="navbar-brand" href="index.html">
+      <img src="img/img/לוגו איתי ועילי שקוף.png" alt="לוגו">
+    </a>
+
+    <!-- כפתור תפריט למובייל -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <!-- קישורי התפריט הראשיים -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="index.html">בית</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">אודות</a></li>
+        <li class="nav-item"><a class="nav-link" href="service.html">מפת חדר כושר</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">צור קשר</a></li>
+        <li class="nav-item"><a class="nav-link active" href="profile.html">הפרופיל שלי</a></li>
+      </ul>
+
+      <!-- אזור התחברות -->
+      <ul class="navbar-nav ms-3">
+        <!-- קישור התחברות - יופיע רק כשהמשתמש לא מחובר -->
+        <li class="nav-item" id="loginLinkWrapper">
+          <a class="nav-link" href="login.html" id="loginLink">התחברות / הרשמה</a>
+        </li>
+        <!-- שם המשתמש - יופיע רק כשהמשתמש מחובר -->
+        <li class="nav-item d-none" id="userInfo">
+          <span class="nav-link" id="userNameDisplay"></span>
+        </li>
+        <!-- כפתור התנתקות - יופיע רק כשהמשתמש מחובר -->
+        <li class="nav-item d-none" id="logoutWrapper">
+          <button class="btn btn-danger btn-sm mt-1" id="logoutBtn">התנתקות</button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- חלק ראשי של העמוד -->
+<section class="hero-section text-center">
+  <div class="container">
+    <h1 class="display-3 fw-bold mb-4">ברוכים הבאים ל-Smart Gym</h1>
+    <p class="lead fs-3 mb-4">המהפכה בחדרי הכושר - כושר מקצועי ובמקסימום יעילות</p>
+    <p class="fs-5 mb-5">טכנולוגיה חכמה, תכנון וצפייה מתמדת בעומס חדר הכושר, צפייה בזמן אמת האם המכשיר תפוס או פנוי</p>
+
+    <!-- כפתורי פעולה -->
+    <div class="d-flex justify-content-center gap-3">
+      <a href="service.html" class="btn btn-light btn-lg px-5 py-3"> צפייה בעומסים</a>
+      <a href="about.html" class="btn btn-outline-light btn-lg px-5 py-3">למד עוד</a>
+    </div>
+  </div>
+</section>
+
+<!-- סיבות לבחור בנו -->
+<section class="container my-5 py-5">
+  <h2 class="text-center mb-5 display-5 fw-bold">למה לבחר ב-Smart Gym?</h2>
+  <div class="row g-4">
+    <!-- יתרון ראשון -->
+    <div class="col-md-3 col-sm-6">
+      <div class="text-center p-4">
+        <div class="feature-icon">🏋️</div>
+        <h4 class="mb-3">ציוד מתקדם</h4>
+        <p>מכשירי אימון חכמים עם טכנולוגיה מתקדמת לחוויית אימון מושלמת</p>
+      </div>
+    </div>
+
+    <!-- יתרון שני -->
+    <div class="col-md-3 col-sm-6">
+      <div class="text-center p-4">
+        <div class="feature-icon">📱</div>
+        <h4 class="mb-3">שליטה מרחוק</h4>
+        <p>נהל את כל האימונים מהאתר - בכל מקום ובכל זמן</p>
+      </div>
+    </div>
+
+    <!-- יתרון שלישי -->
+    <div class="col-md-3 col-sm-6">
+      <div class="text-center p-4">
+        <div class="feature-icon">📊</div>
+        <h4 class="mb-3">ניטור בזמן אמת</h4>
+        <p>עקוב אחרי תכולת חדר הכושר, תפוסת המכשירים, וכל זה גם במהלך האימון</p>
+      </div>
+    </div>
+
+    <!-- יתרון רביעי -->
+    <div class="col-md-3 col-sm-6">
+      <div class="text-center p-4">
+        <div class="feature-icon">🎯</div>
+        <h4 class="mb-3">תחזיות ליום ולשבוע הקרוב</h4>
+        <p>התראות שנבנות במיוחד עבורך ועוזרות לך להשיג את המטרות שלך במינימום זמן</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- נתוני הסטטיסטיקה -->
+<section class="stats-section">
+  <div class="container">
+    <div class="row text-center">
+      <!-- סטטיסטיקה ראשונה -->
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="stat-number">15K+</div>
+        <p class="fs-5">משתמשים מרוצים</p>
+      </div>
+      <!-- סטטיסטיקה שנייה -->
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="stat-number">500+</div>
+        <p class="fs-5">תוכניות אימון</p>
+      </div>
+      <!-- סטטיסטיקה שלישית -->
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="stat-number">24/7</div>
+        <p class="fs-5">תמיכה טכנית</p>
+      </div>
+      <!-- סטטיסטיקה רביעית -->
+      <div class="col-md-3 col-sm-6 mb-4">
+        <div class="stat-number">98%</div>
+        <p class="fs-5">שביעות רצון</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- איך זה עובד -->
+<section class="container my-5 py-5">
+  <h2 class="text-center mb-5 display-5 fw-bold">איך זה עובד?</h2>
+  <div class="row g-4">
+
+    <!-- שלב ראשון -->
+    <div class="col-md-4">
+      <div class="card h-100 text-center p-4 border-primary">
+        <div class="card-body">
+          <div class="display-4 text-primary mb-3">1</div>
+          <h4 class="mb-3">הרשמה והתקנה</h4>
+          <p>הירשם לשירות, היכנס אל האתר - זה פשוט ומהיר</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- שלב שני -->
+    <div class="col-md-4">
+      <div class="card h-100 text-center p-4 border-primary">
+        <div class="card-body">
+          <div class="display-4 text-primary mb-3">2</div>
+          <h4 class="mb-3">צפה בעומסים</h4>
+          <p>המערכת תבנה עבורך את תכולת חדר הכושר למשך כל השבוע הקרוב</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- שלב שלישי -->
+    <div class="col-md-4">
+      <div class="card h-100 text-center p-4 border-primary">
+        <div class="card-body">
+          <div class="display-4 text-primary mb-3">3</div>
+          <h4 class="mb-3">התחל להתאמן</h4>
+          <p>עקוב אחרי תפוסת המכשירים בזמן אמת, קבל משוב והשג את התוצאות שחלמת עליהן</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- טעינת הסקריפטים -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- סקריפטי Firebase -->
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore-compat.js"></script>
+
+<!-- הסקריפט הראשי שלנו -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

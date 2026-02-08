@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<!-- הגדרות בסיסיות של הדף -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>צור קשר - Smart Gym</title>
+
+<!-- קישורים לספריות חיצוניות -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<div class="container-fluid">
+<a class="navbar-brand" href="index.html"><img src="img/img/לוגו איתי ועילי שקוף.png" alt="לוגו"></a>
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"><span class="navbar-toggler-icon"></span></button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+<li class="nav-item"><a class="nav-link" href="index.html">בית</a></li>
+<li class="nav-item"><a class="nav-link" href="about.html">אודות</a></li>
+<li class="nav-item"><a class="nav-link" href="service.html">מפת חדר כושר</a></li>
+<li class="nav-item"><a class="nav-link active" href="contact.html">צור קשר</a></li>
+<li class="nav-item"><a class="nav-link" href="profile.html">הפרופיל שלי</a></li>
+</ul>
+<ul class="navbar-nav ms-3">
+<li class="nav-item" id="loginLinkWrapper"><a class="nav-link" href="login.html">התחברות / הרשמה</a></li>
+<li class="nav-item d-none" id="userInfo"><span class="nav-link" id="userNameDisplay"></span></li>
+<li class="nav-item d-none" id="logoutWrapper"><button class="btn btn-danger btn-sm mt-1" id="logoutBtn">התנתקות</button></li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="hero"><div class="container text-center"><h1 class="display-4 fw-bold">צור קשר</h1><p class="lead">נשמח לשמוע ממך</p></div></section>
+<main class="py-5">
+<div class="container">
+<div class="row">
+<div class="col-lg-8 mb-4">
+<div class="card shadow-lg border-0 rounded-4">
+<div class="card-body p-4">
+<h3 class="mb-4"><i class="bi bi-envelope-fill text-primary me-2"></i>שלח לנו הודעה</h3>
+<div id="feedback-message"></div>
+<form id="contactForm">
+<div class="mb-3"><label class="form-label">שם מלא:</label><input type="text" class="form-control" id="contactName" placeholder="הכנס את שמך"></div>
+<div class="mb-3"><label class="form-label">אימייל:</label><input type="email" class="form-control" id="contactEmail" placeholder="your@email.com"></div>
+<div class="mb-3"><label class="form-label">הודעה:</label><textarea class="form-control" id="contactMessage" rows="4" placeholder="כתוב את הודעתך..."></textarea></div>
+<fieldset class="mb-3">
+<legend class="fs-6 fw-bold">סוג הפניה:</legend>
+<div class="form-check"><input class="form-check-input" type="radio" name="type" id="r1" checked><label class="form-check-label" for="r1">בעיה בציוד</label></div>
+<div class="form-check"><input class="form-check-input" type="radio" name="type" id="r2"><label class="form-check-label" for="r2">התייעצות</label></div>
+<div class="form-check"><input class="form-check-input" type="radio" name="type" id="r3"><label class="form-check-label" for="r3">שאלה כללית</label></div>
+</fieldset>
+<fieldset class="mb-3">
+<legend class="fs-6 fw-bold">מיקוד הפניה:</legend>
+<div class="form-check"><input class="form-check-input" type="checkbox" id="c1"><label class="form-check-label" for="c1">מידע על מכשירים</label></div>
+<div class="form-check"><input class="form-check-input" type="checkbox" id="c2"><label class="form-check-label" for="c2">בעיות טכניות</label></div>
+<div class="form-check"><input class="form-check-input" type="checkbox" id="c3"><label class="form-check-label" for="c3">הגדרות ראשוניות</label></div>
+<div class="form-check"><input class="form-check-input" type="checkbox" id="c4"><label class="form-check-label" for="c4">ייעוץ זמנים</label></div>
+</fieldset>
+<div class="mb-4"><label class="form-label">סיווג:</label><select class="form-select" id="contactCategory"><option value="">בחר...</option><option value="support">תמיכה טכנית</option><option value="training">ייעוץ אימונים</option></select></div>
+<button type="button" class="btn btn-primary btn-lg w-100" onclick="submitContactForm()"><i class="bi bi-send-fill me-1"></i>שלח</button>
+</form>
+</div>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="card border-primary h-100 text-center p-4">
+<h4 class="text-primary mb-4">פרטי התקשרות</h4>
+<div class="mb-4"><i class="bi bi-telephone-fill text-primary fs-2"></i><h6>טלפון</h6><p class="text-muted">03-1234567</p></div>
+<div class="mb-4"><i class="bi bi-envelope-fill text-primary fs-2"></i><h6>אימייל</h6><p class="text-muted">info@smartgym.co.il</p></div>
+<div class="mb-4"><i class="bi bi-geo-alt-fill text-primary fs-2"></i><h6>כתובת</h6><p class="text-muted">רחוב הספורט 10, תל אביב</p></div>
+<div><i class="bi bi-clock-fill text-primary fs-2"></i><h6>שעות פעילות</h6><p class="text-muted">א'-ה': 06:00-23:00</p></div>
+</div>
+</div>
+</div>
+<div class="card shadow mt-5">
+<div class="card-body">
+<h3 class="mb-4"><i class="bi bi-question-circle-fill text-warning me-2"></i>בעיות נפוצות</h3>
+<table class="table table-striped">
+<thead class="table-primary"><tr><th>בעיה</th><th>פתרון</th></tr></thead>
+<tbody>
+<tr><td>החיישנים לא עובדים</td><td>בדוק חיבור והפעל מחדש</td></tr>
+<tr><td>אין חיבור לאינטרנט</td><td>התחבר מחדש ל-WiFi</td></tr>
+<tr><td>המסך לא מגיב</td><td>בצע איפוס רך</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<footer class="py-4"><div class="container text-center"><p class="mb-2">© 2025 Smart Gym</p><p><a href="about.html">אודות</a> | <a href="service.html">מפת חדר כושר</a></p></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore-compat.js"></script>
+<script src="js/script.js"></script>
+<script>
+// פונקציה פשוטה לשליחת טופס יצירת קשר
+function submitContactForm() {
+  var name = document.getElementById("contactName").value;
+  var email = document.getElementById("contactEmail").value;
+  var message = document.getElementById("contactMessage").value;
+  
+  // בדיקה שמילאו את כל השדות הנדרשים
+  if (!name || !email || !message) {
+    showMessage("נא למלא את כל השדות", false);
+    return;
+  }
+  
+  // הודעת הצלחה ואיפוס הטופס
+  showMessage("ההודעה נשלחה בהצלחה!", true);
+  document.getElementById("contactForm").reset();
+}
+</script>
+</body>
+</html>

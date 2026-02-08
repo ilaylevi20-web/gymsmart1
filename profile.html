@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<!-- הגדרות בסיסיות של הדף -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הפרופיל שלי - Smart Gym</title>
+
+<!-- קישורים לספריות חיצוניות -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- ============================================ -->
+<!-- תפריט ניווט עליון -->
+<!-- ============================================ -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html">
+      <img src="img/img/לוגו איתי ועילי שקוף.png" alt="לוגו">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">בית</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">אודות</a></li>
+        <li class="nav-item"><a class="nav-link" href="service.html">מפת חדר כושר</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">צור קשר</a></li>
+        <li class="nav-item"><a class="nav-link active" href="profile.html">הפרופיל שלי</a></li>
+      </ul>
+      <ul class="navbar-nav ms-3">
+        <li class="nav-item d-none" id="loginLinkWrapper"><a class="nav-link" href="login.html">התחברות / הרשמה</a></li>
+        <li class="nav-item d-none" id="userInfo"><span class="nav-link" id="userNameDisplay"></span></li>
+        <li class="nav-item d-none" id="logoutWrapper"><button class="btn btn-danger btn-sm mt-1" id="logoutBtn">התנתקות</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold"><i class="bi bi-person-circle"></i> הפרופיל שלי</h1>
+    <p class="lead">צפה ונהל את פרטי החשבון שלך</p>
+  </div>
+</section>
+
+<main class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4">
+          <div class="card-body p-4">
+            <div class="text-center mb-4">
+              <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:80px;height:80px;"><i class="bi bi-person-fill fs-1"></i></div>
+              <h3>פרטי החשבון</h3>
+            </div>
+            <div class="d-flex align-items-center p-3 bg-light rounded-3 mb-3">
+              <i class="bi bi-person text-primary fs-4 me-3"></i>
+              <div><small class="text-muted">שם מלא</small><div class="fw-bold" id="p_name">טוען...</div></div>
+            </div>
+            <div class="d-flex align-items-center p-3 bg-light rounded-3 mb-3">
+              <i class="bi bi-envelope text-primary fs-4 me-3"></i>
+              <div><small class="text-muted">אימייל</small><div class="fw-bold" id="p_email">טוען...</div></div>
+            </div>
+            <div class="d-flex align-items-center p-3 bg-light rounded-3 mb-3">
+              <i class="bi bi-fingerprint text-primary fs-4 me-3"></i>
+              <div><small class="text-muted">מזהה משתמש (UID)</small><div class="fw-bold small" id="p_uid">טוען...</div></div>
+            </div>
+            <div class="d-flex align-items-center p-3 bg-light rounded-3 mb-3">
+              <i class="bi bi-calendar-plus text-primary fs-4 me-3"></i>
+              <div><small class="text-muted">תאריך הרשמה</small><div class="fw-bold" id="p_created">טוען...</div></div>
+            </div>
+            <div class="d-flex align-items-center p-3 bg-light rounded-3 mb-3">
+              <i class="bi bi-clock-history text-primary fs-4 me-3"></i>
+              <div><small class="text-muted">התחברות אחרונה</small><div class="fw-bold" id="p_lastLogin">טוען...</div></div>
+            </div>
+            <button class="btn btn-danger w-100 mt-3" onclick="logoutUser()"><i class="bi bi-box-arrow-right me-1"></i>התנתקות</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="py-4">
+  <div class="container text-center">
+    <p class="mb-2">© 2025 Smart Gym</p>
+    <p><a href="contact.html">צור קשר</a> | <a href="service.html">מפת חדר כושר</a></p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore-compat.js"></script>
+<script src="js/script.js"></script>
+<script>
+// המתנה קצרה ואז בדיקה אם המשתמש מחובר
+setTimeout(function() {
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (!user) { 
+      // אם המשתמש לא מחובר - העברה לדף התחברות
+      window.location.href = "login.html"; 
+      return; 
+    }
+    
+    // עדכון פרטי המשתמש בדף
+    var userName = user.displayName || "לא מוגדר";
+    document.getElementById("p_name").innerText = userName;
+    document.getElementById("p_email").innerText = user.email;
+    document.getElementById("p_uid").innerText = user.uid;
+    
+    // עדכון תאריכים בעברית
+    var lastLogin = new Date(user.metadata.lastSignInTime).toLocaleString("he-IL");
+    var createdDate = new Date(user.metadata.creationTime).toLocaleString("he-IL");
+    document.getElementById("p_lastLogin").innerText = lastLogin;
+    document.getElementById("p_created").innerText = createdDate;
+  });
+}, 1000);
+</script>
+</body>
+</html>

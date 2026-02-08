@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<!-- הגדרות בסיסיות של הדף -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>התחברות - Smart Gym</title>
+
+<!-- קישורים לספריות חיצוניות -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- תפריט ניווט עליון -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container-fluid">
+    <!-- לוגו של האתר -->
+    <a class="navbar-brand" href="index.html">
+      <img src="img/img/לוגו איתי ועילי שקוף.png" alt="לוגו">
+    </a>
+    <!-- כפתור תפריט למובייל -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- תוכן התפריט -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <!-- קישורי הניווט -->
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">בית</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">אודות</a></li>
+        <li class="nav-item"><a class="nav-link" href="service.html">מפת חדר כושר</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">צור קשר</a></li>
+        <li class="nav-item"><a class="nav-link" href="profile.html">הפרופיל שלי</a></li>
+      </ul>
+      <!-- אזור התחברות -->
+      <ul class="navbar-nav ms-3">
+        <li class="nav-item" id="loginLinkWrapper"><a class="nav-link active" href="login.html">התחברות / הרשמה</a></li>
+        <li class="nav-item d-none" id="userInfo"><span class="nav-link" id="userNameDisplay"></span></li>
+        <li class="nav-item d-none" id="logoutWrapper"><button class="btn btn-danger btn-sm mt-1" id="logoutBtn">התנתקות</button></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- כותרת הדף -->
+<section class="hero">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold">ברוכים הבאים</h1>
+    <p class="lead">התחבר או הירשם</p>
+  </div>
+</section>
+
+<!-- תוכן הדף הראשי -->
+<main class="py-5">
+<div class="container">
+<div class="row justify-content-center">
+<div class="col-md-6 col-lg-5">
+<div class="card shadow-lg border-0 rounded-4">
+<div class="card-body p-4">
+
+<!-- טאבים להתחברות/הרשמה -->
+<ul class="nav nav-pills nav-fill mb-4">
+<li class="nav-item">
+  <button class="nav-link active" id="loginTabBtn" onclick="showLoginTab()">התחברות</button>
+</li>
+<li class="nav-item">
+  <button class="nav-link" id="registerTabBtn" onclick="showRegisterTab()">הרשמה</button>
+</li>
+</ul>
+
+<!-- מקום להודעות למשתמש -->
+<div id="feedback-message"></div>
+
+<!-- טאב התחברות -->
+<div id="loginTab">
+<div class="text-center mb-4">
+  <i class="bi bi-person-circle text-primary" style="font-size:3rem;"></i>
+  <h4 class="mt-2">התחבר לחשבון</h4>
+</div>
+<!-- שדות התחברות -->
+<div class="mb-3">
+  <label class="form-label">אימייל</label>
+  <input type="email" class="form-control" id="loginEmail" placeholder="your@email.com">
+</div>
+<div class="mb-3">
+  <label class="form-label">סיסמה</label>
+  <input type="password" class="form-control" id="loginPass" placeholder="******">
+</div>
+<button class="btn btn-primary w-100" onclick="loginUser()">התחברות</button>
+<p class="text-center mt-3 text-muted">אין לך חשבון? <a href="#" onclick="showRegisterTab()">הירשם</a></p>
+</div>
+
+<!-- טאב הרשמה -->
+<div id="registerTab" style="display:none;">
+<div class="text-center mb-4">
+  <i class="bi bi-person-plus-fill text-success" style="font-size:3rem;"></i>
+  <h4 class="mt-2">הרשמה חדשה</h4>
+</div>
+<!-- שדות הרשמה -->
+<div class="mb-3">
+  <label class="form-label">שם מלא</label>
+  <input type="text" class="form-control" id="regName" placeholder="השם שלך">
+</div>
+<div class="mb-3">
+  <label class="form-label">אימייל</label>
+  <input type="email" class="form-control" id="regEmail" placeholder="your@email.com">
+</div>
+<div class="mb-3">
+  <label class="form-label">סיסמה</label>
+  <input type="password" class="form-control" id="regPass" placeholder="לפחות 6 תווים">
+</div>
+<button class="btn btn-success w-100" onclick="registerUser()">הרשמה</button>
+<p class="text-center mt-3 text-muted">יש לך חשבון? <a href="#" onclick="showLoginTab()">התחבר</a></p>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<!-- כותרת תחתונה -->
+<footer class="py-4">
+  <div class="container text-center">
+    <p>© 2025 Smart Gym</p>
+  </div>
+</footer>
+
+<!-- טעינת הספריות -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore-compat.js"></script>
+<script src="js/script.js"></script>
+
+<script>
+// פונקציה להחלפת טאבים - גרסה פשוטה לתלמיד מתחיל
+function showLoginTab() {
+  // מסתיר את הטאב של הרשמה
+  document.getElementById('loginTab').style.display = 'block';
+  document.getElementById('registerTab').style.display = 'none';
+  
+  // מעדכן את הכפתורים
+  document.getElementById('loginTabBtn').classList.add('active');
+  document.getElementById('registerTabBtn').classList.remove('active');
+}
+
+function showRegisterTab() {
+  // מסתיר את הטאב של התחברות
+  document.getElementById('loginTab').style.display = 'none';
+  document.getElementById('registerTab').style.display = 'block';
+  
+  // מעדכן את הכפתורים
+  document.getElementById('loginTabBtn').classList.remove('active');
+  document.getElementById('registerTabBtn').classList.add('active');
+}
+
+// פונקציה כללית להחלפת טאבים - כדי לשמור על תאימות
+function showTab(tabType) {
+  if (tabType === 'login') {
+    showLoginTab();
+  } else {
+    showRegisterTab();
+  }
+}
+</script>
+</body>
+</html>
