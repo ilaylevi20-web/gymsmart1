@@ -72,7 +72,7 @@
 </ul>
 
 <!-- מקום להודעות למשתמש -->
-<div id="feedback-message"></div>
+<div id="feedback-message" class="mb-3"></div>
 
 <!-- טאב התחברות -->
 <div id="loginTab">
@@ -81,15 +81,17 @@
   <h4 class="mt-2">התחבר לחשבון</h4>
 </div>
 <!-- שדות התחברות -->
+<form id="loginForm" onsubmit="return false;">
 <div class="mb-3">
   <label class="form-label">אימייל</label>
-  <input type="email" class="form-control" id="loginEmail" placeholder="your@email.com">
+  <input type="email" class="form-control" id="loginEmail" placeholder="your@email.com" required>
 </div>
 <div class="mb-3">
   <label class="form-label">סיסמה</label>
-  <input type="password" class="form-control" id="loginPass" placeholder="******">
+  <input type="password" class="form-control" id="loginPass" placeholder="******" required>
 </div>
-<button class="btn btn-primary w-100" onclick="loginUser()">התחברות</button>
+<button type="button" class="btn btn-primary w-100" onclick="loginUser()">התחברות</button>
+</form>
 <p class="text-center mt-3 text-muted">אין לך חשבון? <a href="#" onclick="showRegisterTab()">הירשם</a></p>
 </div>
 
@@ -100,19 +102,21 @@
   <h4 class="mt-2">הרשמה חדשה</h4>
 </div>
 <!-- שדות הרשמה -->
+<form id="registerForm" onsubmit="return false;">
 <div class="mb-3">
   <label class="form-label">שם מלא</label>
-  <input type="text" class="form-control" id="regName" placeholder="השם שלך">
+  <input type="text" class="form-control" id="regName" placeholder="השם שלך" required>
 </div>
 <div class="mb-3">
   <label class="form-label">אימייל</label>
-  <input type="email" class="form-control" id="regEmail" placeholder="your@email.com">
+  <input type="email" class="form-control" id="regEmail" placeholder="your@email.com" required>
 </div>
 <div class="mb-3">
   <label class="form-label">סיסמה</label>
-  <input type="password" class="form-control" id="regPass" placeholder="לפחות 6 תווים">
+  <input type="password" class="form-control" id="regPass" placeholder="לפחות 6 תווים" required>
 </div>
-<button class="btn btn-success w-100" onclick="registerUser()">הרשמה</button>
+<button type="button" class="btn btn-success w-100" onclick="registerUser()">הרשמה</button>
+</form>
 <p class="text-center mt-3 text-muted">יש לך חשבון? <a href="#" onclick="showLoginTab()">התחבר</a></p>
 </div>
 

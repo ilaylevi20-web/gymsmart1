@@ -14,70 +14,50 @@
 
 <body>
 
-  <!-- תפריט ניווט למחשבים -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary d-none d-lg-flex fixed-top">
-    <div class="container-fluid">
-      <!-- לוגו של האתר -->
-      <a class="navbar-brand" href="index.html">
-        <img src="img/img/לוגו איתי ועילי שקוף.png" alt="לוגו">
-      </a>
-      <!-- קישורי ניווט -->
+<!-- תפריט ניווט עליון -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+  <div class="container-fluid">
+
+    <!-- לוגו של האתר -->
+    <a class="navbar-brand" href="index.html">
+      <img src="img/img/לוגו איתי ועילי שקוף.png" alt="לוגו">
+    </a>
+
+    <!-- כפתור תפריט למובייל -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <!-- קישורי התפריט הראשיים -->
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="index.html">בית</a></li>
         <li class="nav-item"><a class="nav-link" href="about.html">אודות</a></li>
-        <li class="nav-item"><a class="nav-link active" aria-current="page" href="service.html">מפת חדר הכושר</a></li>
+        <li class="nav-item"><a class="nav-link active" href="service.html">מפת חדר כושר</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.html">צור קשר</a></li>
-        <li class="nav-item"><a class="nav-link active" href="profile.html">הפרופיל שלי</a></li>
+        <li class="nav-item"><a class="nav-link" href="profile.html">הפרופיל שלי</a></li>
       </ul>
-    </div>
-    
-    <!-- אזור התחברות -->
-    <ul class="navbar-nav ms-3" id="authArea">
-      <!-- כפתור התחברות - יופיע רק אם לא מחובר -->
-      <li class="nav-item" id="loginLinkWrapper">
-        <a class="nav-link" href="login.html" id="loginLink">התחברות / הרשמה</a>
-      </li>
-      <!-- שם המשתמש - יופיע רק אם מחובר -->
-      <li class="nav-item d-none" id="userInfo">
-        <span class="nav-link" id="userNameDisplay"></span>
-      </li>
-      <!-- כפתור יציאה -->
-      <li class="nav-item d-none" id="logoutWrapper">
-        <button class="btn btn-danger btn-sm mt-1" id="logoutBtn">התנתקות</button>
-      </li>
-    </ul>
 
-  </nav>
-
-  <!-- תפריט ניווט למובייל -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary d-lg-none fixed-top">
-    <div class="container-fluid">
-      <!-- לוגו -->
-      <a class="navbar-brand" href="index.html">
-        <img src="img/img/לוגו איתי ועילי שקוף.png" alt="לוגו">
-      </a>
-      <!-- כפתור פתיחת תפריט -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNav" aria-controls="offcanvasNav">
-        <span class="navbar-toggler-icon"></span><span class="ms-2">תפריט</span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- תפריט צד למובייל -->
-  <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasNav" aria-labelledby="offcanvasNavLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title text-white" id="offcanvasNavLabel">תפריט</h5>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="סגור"></button>
-    </div>
-    <div class="offcanvas-body">
-      <ul class="list-group">
-        <li class="list-group-item"><a href="index.html">בית</a></li>
-        <li class="list-group-item"><a href="about.html">אודות</a></li>
-        <li class="list-group-item"><a href="service.html">מפת חדר הכושר</a></li>
-        <li class="list-group-item"><a href="contact.html">צור קשר</a></li>
+      <!-- אזור התחברות -->
+      <ul class="navbar-nav ms-3">
+        <!-- קישור התחברות - יופיע רק כשהמשתמש לא מחובר -->
+        <li class="nav-item" id="loginLinkWrapper">
+          <a class="nav-link" href="login.html" id="loginLink">התחברות / הרשמה</a>
+        </li>
+        <!-- שם המשתמש - יופיע רק כשהמשתמש מחובר -->
+        <li class="nav-item d-none" id="userInfo">
+          <span class="nav-link" id="userNameDisplay"></span>
+        </li>
+        <!-- כפתור התנתקות - יופיע רק כשהמשתמש מחובר -->
+        <li class="nav-item d-none" id="logoutWrapper">
+          <button class="btn btn-danger btn-sm mt-1" id="logoutBtn">התנתקות</button>
+        </li>
       </ul>
+
     </div>
   </div>
+</nav>
 
 
 
