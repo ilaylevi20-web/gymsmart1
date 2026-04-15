@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>בדיקת מסד נתונים Firebase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status-box {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ccc;
+        }
+        .success { 
+            background-color: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+        .error { 
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+        .info { 
+            background-color: #d1ecf1;
+            border-left-color: #17a2b8;
+            color: #0c5460;
+        }
+        .data-display {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 10px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .timestamp {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 בדיקת מסד נתונים Firebase - smart-gym-80755</h1>
+        
+        <div class="status-box info">
+            <strong>בודק:</strong> נתיב 'fromAltera' במסד הנתונים
+        </div>
+
+        <div class="manual-check">
+            <h3>🔍 בדיקה ידנית אלטרנטיבית</h3>
+            <p>אם הכלי האוטומטי לא עובד, תוכל לבדוק ב-Firebase Console:</p>
+            <ol>
+                <li>כנס ל- <a href="https://console.firebase.google.com/project/smart-gym-80755/database/smart-gym-80755-default-rtb/data" target="_blank">Firebase Console</a></li>
+                <li>בצד שמאל לחץ על "Realtime Database"</li>
+                <li>חפש את הנתיב: <code>/fromAltera</code></li>
+                <li>בדוק שהשדות A, B, C קיימים עם ערכים עדכניים</li>
+            </ol>
+        </div>
+
+        <button onclick="checkFirebaseDatabase()">🔍 בדוק מסד נתונים עכשיו</button>
+        <button onclick="startRealTimeMonitoring()">📡 התחל ניטור זמן אמת</button>
+        <button onclick="stopRealTimeMonitoring()">⏹️ עצור ניטור</button>
+        <button onclick="clearResults()">🧹 נקה תוצאות</button>
+
+        <div id="results"></div>
+    </div>
+
+    <!-- Firebase version 8 (מותאם לקוד הקיים) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <!-- בדיקה נוספת לפתרון בעיות CORS -->
+    <style>
+        .manual-check {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+
+    <script>
+        // תצורת Firebase (מהקוד הקיים)
+        var firebaseConfig = {
+            apiKey: "AIzaSyB9828WAtk1LESQr0VaL64gR1c7GmFHBXg",
+            authDomain: "smart-gym-80755.firebaseapp.com",
+            databaseURL: "https://smart-gym-80755-default-rtb.firebaseio.com",
+            projectId: "smart-gym-80755",
+            storageBucket: "smart-gym-80755.firebasestorage.app",
+            messagingSenderId: "883040693948",
+            appId: "1:883040693948:web:a1a316f9674dd6ab036ab9"
+        };
+
+        // אתחול Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        var database = firebase.database();
+        var monitoringListener = null;
+
+        // פונקציה להצגת תוצאות
+        function addResult(message, type = 'info') {
+            const resultsDiv = document.getElementById('results');
+            const timestamp = new Date().toLocaleString('he-IL');
+            const resultBox = document.createElement('div');
+            resultBox.className = `status-box ${type}`;
+            resultBox.innerHTML = `
+                <div class="timestamp">${timestamp}</div>
+                <div>${message}</div>
+            `;
+            resultsDiv.appendChild(resultBox);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+
+        // בדיקה חד פעמית של מסד הנתונים
+        function checkFirebaseDatabase() {
+            addResult('🔍 מתחיל בדיקת מסד נתונים...', 'info');
+            
+            const fromAlteraRef = database.ref('fromAltera');
+            
+            fromAlteraRef.once('value')
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        const data = snapshot.val();
+                        addResult('✅ הנתיב "fromAltera" קיים במסד הנתונים!', 'success');
+                        
+                        // בדיקת מבנה הנתונים
+                        const keys = Object.keys(data);
+                        addResult(`📊 מבנה הנתונים: ${keys.join(', ')}`, 'info');
+                        
+                        // הצגת הנתונים
+                        const dataDisplay = document.createElement('div');
+                        dataDisplay.className = 'data-display';
+                        dataDisplay.textContent = JSON.stringify(data, null, 2);
+                        
+                        const resultBox = document.createElement('div');
+                        resultBox.className = 'status-box info';
+                        resultBox.innerHTML = '<strong>📋 נתונים נוכחיים:</strong>';
+                        resultBox.appendChild(dataDisplay);
+                        document.getElementById('results').appendChild(resultBox);
+                        
+                        // בדיקת שדות A, B, C
+                        if (data.hasOwnProperty('A') && data.hasOwnProperty('B') && data.hasOwnProperty('C')) {
+                            addResult('✅ כל השדות הנדרשים (A, B, C) קיימים!', 'success');
+                            
+                            // בדיקת סוג הנתונים
+                            const typeA = typeof data.A;
+                            const typeB = typeof data.B;
+                            const typeC = typeof data.C;
+                            
+                            addResult(`🔢 סוגי נתונים: A=${typeA}(${data.A}), B=${typeB}(${data.B}), C=${typeC}(${data.C})`, 'info');
+                            
+                            // בדיקת תקינות הנתונים
+                            if (!isNaN(data.A) && !isNaN(data.B) && !isNaN(data.C)) {
+                                addResult('✅ כל הנתונים הם מספריים וחוקיים!', 'success');
+                            } else {
+                                addResult('⚠️ חלק מהנתונים אינם מספריים!', 'error');  
+                            }
+                        } else {
+                            addResult('⚠️ חסרים שדות A, B או C!', 'error');
+                        }
+                        
+                    } else {
+                        addResult('❌ הנתיב "fromAltera" לא קיים במסד הנתונים!', 'error');
+                    }
+                })
+                .catch((error) => {
+                    addResult(`❌ שגיאה בגישה למסד הנתונים: ${error.message}`, 'error');
+                    console.error('Firebase Error:', error);
+                });
+        }
+
+        // ניטור זמן אמת
+        function startRealTimeMonitoring() {
+            if (monitoringListener) {
+                addResult('ℹ️ ניטור זמן אמת כבר פעיל', 'info');
+                return;
+            }
+
+            addResult('📡 מתחיל ניטור זמן אמת...', 'info');
+            
+            const fromAlteraRef = database.ref('fromAltera');
+            monitoringListener = fromAlteraRef.on('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    addResult(`🔄 עדכון זמן אמת - A:${data.A}, B:${data.B}, C:${data.C}`, 'success');
+                } else {
+                    addResult('❌ אין נתונים בניטור זמן אמת', 'error');
+                }
+            }, (error) => {
+                addResult(`❌ שגיאה בניטור זמן אמת: ${error.message}`, 'error');
+            });
+        }
+
+        // עצירת ניטור זמן אמת
+        function stopRealTimeMonitoring() {
+            if (monitoringListener) {
+                database.ref('fromAltera').off('value', monitoringListener);
+                monitoringListener = null;
+                addResult('⏹️ ניטור זמן אמת הופסק', 'info');
+            } else {
+                addResult('ℹ️ ניטור זמן אמת לא היה פעיל', 'info');
+            }
+        }
+
+        // ניקוי תוצאות
+        function clearResults() {
+            document.getElementById('results').innerHTML = '';
+        }
+
+        // בדיקה אוטומטית בטעינת הדף
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                addResult('🌐 מתחבר למסד הנתונים...', 'info');
+                setTimeout(checkFirebaseDatabase, 1000);
+            }, 500);
+        });
+
+        // ניקוי בסגירת הדף
+        window.addEventListener('beforeunload', function() {
+            stopRealTimeMonitoring();
+        });
+    </script>
+</body>
+</html>

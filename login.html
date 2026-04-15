@@ -34,6 +34,8 @@
         <li class="nav-item"><a class="nav-link" href="service.html">מפת חדר כושר</a></li>
         <li class="nav-item"><a class="nav-link" href="contact.html">צור קשר</a></li>
         <li class="nav-item"><a class="nav-link" href="profile.html">הפרופיל שלי</a></li>
+        <li class="nav-item"><a class="nav-link" href="security.html"> אבטחה</a></li>
+
       </ul>
       <!-- אזור התחברות -->
       <ul class="navbar-nav ms-3">
@@ -64,10 +66,10 @@
 <!-- טאבים להתחברות/הרשמה -->
 <ul class="nav nav-pills nav-fill mb-4">
 <li class="nav-item">
-  <button class="nav-link active" id="loginTabBtn" onclick="showLoginTab()">התחברות</button>
+  <button class="nav-link active" id="loginTabBtn">התחברות</button>
 </li>
 <li class="nav-item">
-  <button class="nav-link" id="registerTabBtn" onclick="showRegisterTab()">הרשמה</button>
+  <button class="nav-link" id="registerTabBtn">הרשמה</button>
 </li>
 </ul>
 
@@ -81,7 +83,7 @@
   <h4 class="mt-2">התחבר לחשבון</h4>
 </div>
 <!-- שדות התחברות -->
-<form id="loginForm" onsubmit="return false;">
+<form id="loginForm">
 <div class="mb-3">
   <label class="form-label">אימייל</label>
   <input type="email" class="form-control" id="loginEmail" placeholder="your@email.com" required>
@@ -90,9 +92,9 @@
   <label class="form-label">סיסמה</label>
   <input type="password" class="form-control" id="loginPass" placeholder="******" required>
 </div>
-<button type="button" class="btn btn-primary w-100" onclick="loginUser()">התחברות</button>
+<button type="button" class="btn btn-primary w-100" id="login-submit-btn">התחברות</button>
 </form>
-<p class="text-center mt-3 text-muted">אין לך חשבון? <a href="#" onclick="showRegisterTab()">הירשם</a></p>
+<p class="text-center mt-3 text-muted">אין לך חשבון? <a href="#" id="switch-to-register">הירשם</a></p>
 </div>
 
 <!-- טאב הרשמה -->
@@ -102,7 +104,7 @@
   <h4 class="mt-2">הרשמה חדשה</h4>
 </div>
 <!-- שדות הרשמה -->
-<form id="registerForm" onsubmit="return false;">
+<form id="registerForm">
 <div class="mb-3">
   <label class="form-label">שם מלא</label>
   <input type="text" class="form-control" id="regName" placeholder="השם שלך" required>
@@ -115,9 +117,9 @@
   <label class="form-label">סיסמה</label>
   <input type="password" class="form-control" id="regPass" placeholder="לפחות 6 תווים" required>
 </div>
-<button type="button" class="btn btn-success w-100" onclick="registerUser()">הרשמה</button>
+<button type="button" class="btn btn-success w-100" id="register-submit-btn">הרשמה</button>
 </form>
-<p class="text-center mt-3 text-muted">יש לך חשבון? <a href="#" onclick="showLoginTab()">התחבר</a></p>
+<p class="text-center mt-3 text-muted">יש לך חשבון? <a href="#" id="switch-to-login">התחבר</a></p>
 </div>
 
 </div>
@@ -141,37 +143,6 @@
 <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore-compat.js"></script>
 <script src="js/script.js"></script>
-
-<script>
-// פונקציה להחלפת טאבים - גרסה פשוטה לתלמיד מתחיל
-function showLoginTab() {
-  // מסתיר את הטאב של הרשמה
-  document.getElementById('loginTab').style.display = 'block';
-  document.getElementById('registerTab').style.display = 'none';
-  
-  // מעדכן את הכפתורים
-  document.getElementById('loginTabBtn').classList.add('active');
-  document.getElementById('registerTabBtn').classList.remove('active');
-}
-
-function showRegisterTab() {
-  // מסתיר את הטאב של התחברות
-  document.getElementById('loginTab').style.display = 'none';
-  document.getElementById('registerTab').style.display = 'block';
-  
-  // מעדכן את הכפתורים
-  document.getElementById('loginTabBtn').classList.remove('active');
-  document.getElementById('registerTabBtn').classList.add('active');
-}
-
-// פונקציה כללית להחלפת טאבים - כדי לשמור על תאימות
-function showTab(tabType) {
-  if (tabType === 'login') {
-    showLoginTab();
-  } else {
-    showRegisterTab();
-  }
-}
-</script>
+<script src="js/login.js"></script>
 </body>
 </html>
