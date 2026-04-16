@@ -32,7 +32,7 @@ function startSensorMonitoring() {
     if (counter) counter.innerText = valB;
 
     // מכשיר 1 - חיישן מרחק
-    updateStatus("machine-1", valA >= 10 && valA <= 100);
+    updateStatus("machine-1", valA >= 2 && valA <= 7);
 
     // מכשירים 2,3,4 - bitwise מהבקר FPGA
     var bits = parseInt(valC);
