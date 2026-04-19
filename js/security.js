@@ -26,6 +26,32 @@ const logContainer   = document.getElementById('log-container');
 
 let firstLoad = true;
 let scanHistory = [];
+let toAlteraResetTimer = null;
+
+async function setToAlteraValue(isAllowed) {
+  try {
+    if (toAlteraResetTimer) {
+      clearTimeout(toAlteraResetTimer);
+      toAlteraResetTimer = null;
+    }
+
+    if (isAllowed) {
+      await db.ref('toAltera').set(35);
+      toAlteraResetTimer = setTimeout(async () => {
+        try {
+          await db.ref('toAltera').set(0);
+        } catch (error) {
+          console.error('toAltera reset error:', error);
+        }
+      }, 3000);
+      return;
+    }
+
+    await db.ref('toAltera').set(0);
+  } catch (error) {
+    console.error('toAltera update error:', error);
+  }
+}
 
 // שעון חי בתחתית המסך
 const updateClock = () => {
@@ -131,6 +157,7 @@ db.ref('/rfid').on('value', async (snapshot) => {
 
   if (!rfidValue) {
     if (firstLoad) firstLoad = false;
+    await setToAlteraValue(false);
     return;
   }
   firstLoad = false;
@@ -145,14 +172,17 @@ db.ref('/rfid').on('value', async (snapshot) => {
       const lastName  = data.lastName  || '';
 
       setRegistered(firstName, lastName, rfidValue);
+      await setToAlteraValue(true);
       addLog(rfidValue, true, `${firstName} ${lastName}`.trim());
     } else {
       setUnregistered(rfidValue);
+      await setToAlteraValue(false);
       addLog(rfidValue, false, '');
     }
   } catch (err) {
     console.error('RFID lookup error:', err);
     setUnregistered(rfidValue);
+    await setToAlteraValue(false);
     addLog(rfidValue, false, '');
   }
 
